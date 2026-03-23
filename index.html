@@ -163,37 +163,30 @@
  </head>
  <body class="h-full">
   <div id="app-wrapper" class="w-full h-full overflow-auto relative">
-   <!-- Background FX -->
    <div class="grid-overlay"></div>
    <div class="glow-orb glow-orb-1"></div>
-   <div class="glow-orb glow-orb-2"></div><!-- Navbar -->
-   <header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+   <div class="glow-orb glow-orb-2"></div><header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
     <nav class="nav-pill px-6 py-3 flex items-center gap-8 text-sm">
      <a href="#home" class="flex items-center gap-2 font-bold text-white text-base">
-      <div class="w-8 h-8 rounded-lg bg-aqua flex items-center justify-center">
-       <span class="text-[#060608] font-black text-sm">O</span>
-      </div><span>Opti<span class="text-aqua">Core</span></span> </a>
+      <span>Opti<span class="text-aqua">Core</span></span> </a>
      <div class="hidden md:flex items-center gap-6 text-zinc-400">
       <a href="#services" class="hover:text-white transition-colors">Dịch vụ</a> <a href="#contact" class="hover:text-white transition-colors">Liên hệ</a>
      </div><button id="mobile-toggle" class="md:hidden text-zinc-400 hover:text-white"> <i data-lucide="menu" style="width:22px;height:22px;"></i> </button>
     </nav>
-   </header><!-- Mobile Menu -->
-   <div id="mobile-menu" class="fixed inset-0 z-40 hidden" style="background:rgba(6,6,8,0.95);backdrop-filter:blur(20px);">
+   </header><div id="mobile-menu" class="fixed inset-0 z-40 hidden" style="background:rgba(6,6,8,0.95);backdrop-filter:blur(20px);">
     <div class="flex flex-col items-center justify-center h-full gap-8 text-xl">
      <a href="#services" class="text-zinc-300 hover:text-aqua transition-colors mobile-link">Dịch vụ</a> <a href="#contact" class="text-zinc-300 hover:text-aqua transition-colors mobile-link">Liên hệ</a> <button id="mobile-close" class="mt-6 text-zinc-500 hover:text-white"> <i data-lucide="x" style="width:28px;height:28px;"></i> </button>
     </div>
-   </div><!-- Hero Section -->
-   <section id="home" class="relative z-10 pt-32 pb-20 px-6">
+   </div><section id="home" class="relative z-10 pt-32 pb-20 px-6">
     <div class="max-w-5xl mx-auto text-center">
      <div class="anim-fade anim-fade-d1 mb-6">
       <span class="tag"> <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-live"></span> Đang hoạt động </span>
      </div>
-     <h1 id="el-hero-title" class="hero-title text-white mb-6 anim-fade anim-fade-d2">Opticore <span class="text-aqua">PC</span> </h1>
+     <h1 id="el-hero-title" class="hero-title text-white mb-6 anim-fade anim-fade-d2">Opticore <span class="text-aqua">Optimization</span> </h1>
      <p id="el-hero-subtitle" class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 anim-fade anim-fade-d3 leading-relaxed">Dịch vụ tối ưu hóa máy tính chuyên nghiệp — Tăng tốc, làm sạch và nâng cấp hệ thống để đạt hiệu suất tối đa.</p>
      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 anim-fade anim-fade-d4">
       <a href="#services" class="btn-primary flex items-center gap-2"> Khám phá dịch vụ <i data-lucide="arrow-right" style="width:18px;height:18px;"></i> </a> <a href="#contact" class="btn-outline flex items-center gap-2"> <i data-lucide="message-circle" style="width:18px;height:18px;"></i> Liên hệ tư vấn </a>
-     </div><!-- Floating shapes -->
-     <div class="relative mt-16 anim-fade anim-fade-d5">
+     </div><div class="relative mt-16 anim-fade anim-fade-d5">
       <div class="flex justify-center gap-6 flex-wrap">
        <div class="card-bento p-6 w-48 text-left anim-float" style="animation-delay:0s;">
         <div class="service-icon mb-3">
@@ -219,8 +212,7 @@
       </div>
      </div>
     </div>
-   </section><!-- Marquee -->
-   <section id="services" class="relative z-10 py-24 px-6">
+   </section><section id="services" class="relative z-10 py-24 px-6">
     <div class="max-w-6xl mx-auto">
      <div class="text-center mb-16 anim-fade">
       <span class="section-label mb-4 inline-flex">Dịch vụ</span>
@@ -228,7 +220,6 @@
       <p class="text-zinc-500 mt-4 max-w-xl mx-auto">Chúng tôi cung cấp giải pháp tối ưu hóa toàn diện giúp máy tính của bạn hoạt động nhanh và ổn định như mới.</p>
      </div>
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Service 1 -->
       <div class="card-bento p-7 group">
        <div class="relative z-10">
         <div class="service-icon mb-5 group-hover:scale-110 transition-transform">
@@ -240,8 +231,7 @@
          <span class="tag text-xs">Windows</span> <span class="tag text-xs">Registry</span> <span class="tag text-xs">Startup</span>
         </div>
        </div>
-      </div><!-- Service 2 -->
-      <div class="card-bento p-7 group">
+      </div><div class="card-bento p-7 group">
        <div class="relative z-10">
         <div class="service-icon mb-5 group-hover:scale-110 transition-transform">
          <i data-lucide="hard-drive" class="text-aqua" style="width:22px;height:22px;"></i>
@@ -252,8 +242,7 @@
          <span class="tag text-xs">Disk Clean</span> <span class="tag text-xs">Defrag</span>
         </div>
        </div>
-      </div><!-- Service 3 -->
-      <div class="card-bento p-7 group">
+      </div><div class="card-bento p-7 group">
        <div class="relative z-10">
         <div class="service-icon mb-5 group-hover:scale-110 transition-transform">
          <i data-lucide="shield-check" class="text-aqua" style="width:22px;height:22px;"></i>
@@ -264,8 +253,7 @@
          <span class="tag text-xs">Antivirus</span> <span class="tag text-xs">Malware</span>
         </div>
        </div>
-      </div><!-- Service 4 -->
-      <div class="card-bento p-7 group">
+      </div><div class="card-bento p-7 group">
        <div class="relative z-10">
         <div class="service-icon mb-5 group-hover:scale-110 transition-transform">
          <i data-lucide="thermometer" class="text-aqua" style="width:22px;height:22px;"></i>
@@ -276,8 +264,7 @@
          <span class="tag text-xs">Thermal Paste</span> <span class="tag text-xs">Cooling</span>
         </div>
        </div>
-      </div><!-- Service 5 -->
-      <div class="card-bento p-7 group">
+      </div><div class="card-bento p-7 group">
        <div class="relative z-10">
         <div class="service-icon mb-5 group-hover:scale-110 transition-transform">
          <i data-lucide="monitor" class="text-aqua" style="width:22px;height:22px;"></i>
@@ -288,8 +275,7 @@
          <span class="tag text-xs">Windows 11</span> <span class="tag text-xs">Drivers</span>
         </div>
        </div>
-      </div><!-- Service 6 -->
-      <div class="card-bento p-7 group">
+      </div><div class="card-bento p-7 group">
        <div class="relative z-10">
         <div class="service-icon mb-5 group-hover:scale-110 transition-transform">
          <i data-lucide="zap" class="text-aqua" style="width:22px;height:22px;"></i>
@@ -303,8 +289,7 @@
       </div>
      </div>
     </div>
-   </section><!-- Contact Section -->
-   <section id="contact" class="relative z-10 py-24 px-6">
+   </section><section id="contact" class="relative z-10 py-24 px-6">
     <div class="max-w-4xl mx-auto">
      <div class="card-bento p-8 md:p-12">
       <div class="relative z-10">
@@ -338,15 +323,12 @@
       </div>
      </div>
     </div>
-   </section><!-- Footer -->
-   <footer class="relative z-10 border-t border-zinc-800/50 py-12 px-6">
+   </section><footer class="relative z-10 border-t border-zinc-800/50 py-12 px-6">
     <div class="max-w-6xl mx-auto">
      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
       <div class="md:col-span-2">
        <div class="flex items-center gap-2 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-aqua flex items-center justify-center">
-         <span class="text-[#060608] font-black text-sm">O</span>
-        </div><span class="font-bold text-white text-lg">Opti<span class="text-aqua">Core</span></span>
+        <span class="font-bold text-white text-lg">Opti<span class="text-aqua">Core</span></span>
        </div>
        <p class="text-sm text-zinc-500 leading-relaxed max-w-sm">Dịch vụ tối ưu hóa máy tính chuyên nghiệp tại Hải Phòng. Tăng tốc, vệ sinh, nâng cấp và bảo vệ hệ thống của bạn.</p>
        <div class="flex gap-3 mt-5">
