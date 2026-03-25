@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="vi" class="h-full">
  <head>
@@ -516,7 +515,7 @@
        <p class="text-sm text-zinc-500 leading-relaxed max-w-sm">Dịch vụ tối ưu hóa máy tính chuyên nghiệp. Tăng tốc, vệ sinh, nâng cấp và bảo vệ hệ thống của bạn.</p>
        <div class="flex gap-3 mt-5">
         <a href="#" class="w-9 h-9 rounded-lg border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-aqua hover:border-aqua/30 transition-all"><i data-lucide="facebook" style="width:16px;height:16px;"></i></a>
-        <a href="#" class="w-9 h-9 rounded-lg border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-aqua hover:border-aqua/30 transition-all"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
+        <a href="#" class="w-9 h-9 rounded-lg border border-zinc-800 flex items-center justify-content text-zinc-500 hover:text-aqua hover:border-aqua/30 transition-all"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a>
         <a href="#" class="w-9 h-9 rounded-lg border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-aqua hover:border-aqua/30 transition-all"><i data-lucide="github" style="width:16px;height:16px;"></i></a>
         <a href="#" class="w-9 h-9 rounded-lg border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-aqua hover:border-aqua/30 transition-all"><i data-lucide="mail" style="width:16px;height:16px;"></i></a>
        </div>
@@ -660,16 +659,18 @@
 
     // ===== MUSIC PLAYER LOGIC =====
     const tracks = [
-      { title: 'Lofi Chill Beats', artist: 'Cyber Core Radio', color: '#7dd3fc', src: null },
-      { title: 'Deep Focus Flow', artist: 'Synthwave Station', color: '#a78bfa', src: null },
-      { title: 'Night Drive', artist: 'Retro Vibes', color: '#f472b6', src: null },
-      { title: 'Zero Gravity', artist: 'Space Ambient', color: '#34d399', src: null },
+      { title: 'Lofi Chill Beats',  artist: 'Cyber Core Radio', color: '#7dd3fc', src: 'https://cdn.discordapp.com/attachments/1468209685684555981/1486256810598993991/Hat_Mua_Vuong_Van_Haiyang_Remix_-_AIR_Cover_Hat_Mua_Vuong_Van_Em_Gio_Nay_ang_Noi_au_Remix.mp3?ex=69c4d804&is=69c38684&hm=cd8139320de4de1cd341f99c4d62deddccb31d3f795db9a27d029b654446316c&'  },
+      { title: 'Deep Focus Flow',   artist: 'Synthwave Station', color: '#a78bfa', src: ''  },
+      { title: 'Night Drive',       artist: 'Retro Vibes',       color: '#f472b6', src: ''  },
+      { title: 'Zero Gravity',      artist: 'Space Ambient',     color: '#34d399', src: ''  },
     ];
+
+    const audio = new Audio();
+    audio.volume = 0.7;
 
     const artColors = ['#7dd3fc','#a78bfa','#f472b6','#34d399'];
     let currentTrack = 0;
     let isPlaying = false;
-    let progress = 0;
     let progressTimer = null;
     let panelOpen = false;
 
@@ -693,6 +694,11 @@
     const artInner = document.getElementById('art-inner');
     const eqBars = document.getElementById('eq-bars');
     const playlistEl = document.getElementById('playlist');
+
+    function formatTime(s) {
+      if (!s || isNaN(s)) return '0:00';
+      return Math.floor(s / 60) + ':' + Math.floor(s % 60).toString().padStart(2, '0');
+    }
 
     // Build playlist UI
     function buildPlaylist() {
@@ -725,19 +731,44 @@
       trackTitle.textContent = t.title;
       trackArtist.textContent = t.artist;
       artInner.style.background = t.color + '18';
-      artInner.querySelector('svg circle:last-of-type') && (artInner.querySelector('svg circle:last-of-type').setAttribute('fill', t.color));
-      // Update art SVG color dynamically
       artInner.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="12" r="10" stroke="${t.color}" stroke-width="1.5" opacity="0.3"/>
         <circle cx="12" cy="12" r="3" fill="${t.color}"/>
         <path d="M12 2 L12 6 M12 18 L12 22 M2 12 L6 12 M18 12 L22 12" stroke="${t.color}" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
       </svg>`;
-      progress = 0;
+
+      // Load audio source if provided
+      if (t.src) {
+        audio.src = t.src;
+        audio.load();
+      } else {
+        audio.src = '';
+      }
+
       progressFill.style.width = '0%';
       timeCur.textContent = '0:00';
-      timeDur.textContent = '3:' + (20 + idx * 7).toString().padStart(2,'0');
+      timeDur.textContent = '--:--';
       buildPlaylist();
     }
+
+    function updateProgress() {
+      if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = pct + '%';
+        timeCur.textContent = formatTime(audio.currentTime);
+        timeDur.textContent = formatTime(audio.duration);
+      }
+    }
+
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('loadedmetadata', () => {
+      timeDur.textContent = formatTime(audio.duration);
+    });
+    audio.addEventListener('ended', () => {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+      setPlaying(true);
+    });
 
     function setPlaying(state) {
       isPlaying = state;
@@ -746,31 +777,17 @@
         iconPause.style.display = '';
         albumArt.classList.add('spinning');
         eqBars.classList.remove('paused');
-        startProgress();
+        if (tracks[currentTrack].src) {
+          audio.play().catch(() => {});
+        }
       } else {
         iconPlay.style.display = '';
         iconPause.style.display = 'none';
         albumArt.classList.remove('spinning');
         eqBars.classList.add('paused');
-        clearInterval(progressTimer);
+        audio.pause();
       }
       buildPlaylist();
-    }
-
-    function startProgress() {
-      clearInterval(progressTimer);
-      const dur = 200 + currentTrack * 47; // fake duration in seconds
-      progressTimer = setInterval(() => {
-        progress = Math.min(progress + (100 / (dur * 10)), 100);
-        progressFill.style.width = progress + '%';
-        const cur = Math.round(progress / 100 * dur);
-        timeCur.textContent = Math.floor(cur/60) + ':' + (cur%60).toString().padStart(2,'0');
-        if (progress >= 100) {
-          currentTrack = (currentTrack + 1) % tracks.length;
-          loadTrack(currentTrack);
-          setPlaying(true);
-        }
-      }, 100);
     }
 
     // Toggle panel
@@ -802,10 +819,15 @@
     });
 
     progressWrap.addEventListener('click', (e) => {
-      const rect = progressWrap.getBoundingClientRect();
-      progress = ((e.clientX - rect.left) / rect.width) * 100;
-      progressFill.style.width = progress + '%';
-      if (isPlaying) { clearInterval(progressTimer); startProgress(); }
+      if (audio.duration) {
+        const rect = progressWrap.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = pct * audio.duration;
+      }
+    });
+
+    volSlider.addEventListener('input', () => {
+      audio.volume = volSlider.value / 100;
     });
 
     // Init
